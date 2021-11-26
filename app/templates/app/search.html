@@ -1,0 +1,38 @@
+{% extends "app/base.html" %}
+{% block content %}
+{% load static %}
+   
+{% if request.user.is_authenticated %}
+  <h2 class="user-title">Hi {{user.username}}! </h2>
+{% else %}
+{% endif %}
+
+<form class="search-form" action="{% url 'searchresults' %}" method="get">
+  <input name="q" type="text" placeholder="Search..."><br>
+  <input type="submit" class="border-0 green-button" value="Send Search">
+</form>
+
+{% endblock content %}
+
+{% block nav %}
+{% if request.user.is_authenticated %}
+  <li class="">
+    <a href="{% url 'cart' %}" style="font-family: lucida console; color: burlywood">Cart</a>
+  </li>
+  <li class="active">
+    <a href="{% url 'search' %}" style="background-color: burlywood;font-family: lucida console">Search</a>
+  </li>
+  <li class="">
+    <a href="{% url 'logout' %}" style="font-family: lucida console; color: burlywood">Logout</a>
+  </li>
+
+{% else %}
+  <li class="">
+    <a href="{% url 'register' %}" style="font-family: lucida console; color: burlywood">Sign Up</a>
+  </li>
+  <li class="">
+    <a href="{% url 'login' %}" style="font-family: lucida console; color: burlywood">Login</a>
+  </li>
+{% endif %}
+
+{% endblock nav %}

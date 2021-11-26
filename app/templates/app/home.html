@@ -1,0 +1,29 @@
+{% extends "app/base.html" %}
+{% block content %}
+    {% load static %}
+    
+    <div class="row">
+        <div class="column">
+            <h1 class="home-title">Welcome to BetterDeal!</h1>
+            <h2 class="home-text">Create you super economic grocery list containing the products with best quality!</h2>
+            <form class="search-form" action="{% url 'searchresults' %}" method="get">
+                <input name="q" type="text" placeholder="Search..." width="100"><br>
+                <input id="submit_button" class="border-0" type="submit" value="Send Search">
+            </form>
+        </div>
+        <div class="column">
+            <img src="{% static 'app/undraw_Welcome_re_h3d9.png' %}" height="600" alt="My image">
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block nav %}
+    <li class="">
+         <a href="{% url 'register' %}" style="font-family: lucida console; color: burlywood">Sign Up</a>
+    </li>
+    <li class="">
+         <a href="{% url 'login' %}" style="font-family: lucida console; color: burlywood">Login</a>
+    </li>
+
+{% endblock nav %}

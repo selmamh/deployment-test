@@ -1,0 +1,147 @@
+.my_table {
+    border-collapse: separate;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.navlink {
+    border-radius: 0px 0px 10px 10px;
+}
+
+.navbar-inverse {
+    background-color: SeaGreen;
+    height: 100px;
+    border-color: SeaGreen;
+    border-radius: 0px 0px 55px 55px;
+}
+
+.navbar-inverse .navbar-brand {
+    color: burlywood;
+    font-family: tahoma;
+    font-size: 80px;
+    padding: 35px 60px 20px;
+}
+
+.home-title {
+    font-size: 60px;
+    font-family: tahoma;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.home-text{
+    font-size: 20px;
+    font-family: lucida console;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.login-form {
+  padding-top: 50px;
+  font-family: lucida console;
+}
+
+input[name="q"] {
+  height: 40px;
+  width: 400px;
+  border-radius: 20px;
+  padding-left: 10px;
+  background-color: #f2f2f2;
+  border-color: #f2f2f2
+}
+
+input:focus{
+    outline: none;
+}
+
+#submit_button, button, .green-button {
+    background-color: #2E8B57;
+    border-radius: 15px;
+    margin-top:15px;
+    padding: 5px;
+}
+
+#submit_button:hover, button:hover, .green-button:hover{
+    background-color: #27764a;
+}
+
+.login-title{
+    text-align: left;
+    padding-top: 50px;
+    font-family: tahoma;
+}
+
+.register-form{
+    padding-top: 50px;
+    font-family: lucida console;
+}
+
+.register-title{
+    font-family: tahoma;
+}
+
+.search-form {
+    text-align: center;
+    font-family: lucida console;
+}
+
+.user-title{
+    padding-top: 50px;
+    padding-bottom: 100px;
+    font-family: tahoma;
+    text-align: center;
+}
+
+.cart-title{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-family: tahoma;
+}
+
+.cart-list{
+    font-family: lucida console;
+}
+
+.searchresults-title{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-family: tahoma;
+}
+
+.searchresults-list{
+    font-family: lucida console;
+}
+
+.row {
+    display: flex;
+}
+  
+.column {
+    flex: 50%;
+}
+
+<<<<<<< HEAD
+=======
+.wrapper{
+    margin: 80px;
+}
+.Align-form{
+    max-width: 380px;
+    margin: 0 auto;
+    background-color:burlywood;
+    padding: 15px 40px 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.Align-title{
+    padding-top:1px;
+    padding-bottom: 12px;
+}
+
+
+>>>>>>> front-end

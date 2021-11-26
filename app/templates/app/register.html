@@ -1,0 +1,32 @@
+{% extends "app/base.html" %}
+
+{% block content %} 
+  <div class="wrapper" >
+    <form class="Align-form" method="post">
+      {% csrf_token %}
+      <h2 class="Align-title">Register</h2>
+      <div class="form-group center">
+        <input type="text" class="form-control" name="username" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" name="password1" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" name="password2" placeholder="Confirm Password">
+      </div>
+  
+      <button type="submit" style="font-family: lucida console">Sign up</button>
+  
+      Already registered? Login <a href="{% url 'login' %}">here.</a> 
+    </form>
+  </div>
+
+{% endblock %}
+{% block nav %}
+    <li class="active" >
+         <a href="{% url 'register' %}" style="background-color: burlywood; font-family: lucida console">Sign Up</a>
+    </li>
+    <li class="">
+         <a href="{% url 'login' %}" style="font-family: lucida console; color: burlywood">Login</a>
+    </li>
+{% endblock nav %}
