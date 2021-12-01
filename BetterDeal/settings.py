@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+8mutk!fhezrfj5xoo%6^lf$(5r5w-wmm)z9i8twem!)4_=yiq
 DEBUG = False
 django_heroku.settings(locals())
 
-ALLOWED_HOSTS = ['127.0.0.1', 'betterdeal.herokuapp.com/']
+ALLOWED_HOSTS = ['127.0.0.1', 'betterdealplatform.herokuapp.com/']
 
 
 # Application definition
