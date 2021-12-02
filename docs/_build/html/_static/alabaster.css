@@ -52,6 +52,7 @@ div.footer {
     font-size: 14px;
     color: #888;
     text-align: right;
+
 }
 
 div.footer a {
@@ -61,11 +62,6 @@ div.footer a {
 p.caption {
     font-family: inherit;
     font-size: inherit;
-}
-
-
-div.relations {
-    display: none;
 }
 
 

@@ -50,4 +50,24 @@
     </div>
 
 </body>
+
+<script>
+    function increaseButtonClick(id) 
+    {
+        var id=id.toString()
+        var new_value=document.getElementById(id).value
+        new_value=parseInt(new_value) + 1;
+        document.getElementById(id).value= new_value.toString()
+    }
+    function decreaseButtonClick(id) 
+    {
+        var id=id.toString()
+        var new_value=document.getElementById(id).value
+        new_value=parseInt(new_value) - 1;
+        if (new_value > 0)
+        {
+            document.getElementById(id).value= new_value.toString();
+        }
+    }
+</script>
 </html>

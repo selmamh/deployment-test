@@ -8,6 +8,9 @@ from django.db.models import Q
 
 # Create your models here.
 
+class Product_with_quantity(models.Model):
+    product_id=models.IntegerField()
+    quantity=models.IntegerField()
 
 class Product (models.Model):
     product_name=models.CharField(max_length=255)
@@ -32,7 +35,7 @@ class Product (models.Model):
 
 class Profile(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE)
-    cart=models.ManyToManyField(Product)
+    cart=models.ManyToManyField(Product_with_quantity)
 
     class Meta:
         db_table = "profile"

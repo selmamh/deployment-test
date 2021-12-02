@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView
-from .models import Product, Profile
+from .models import Product, Profile, Product_with_quantity
 from django.db.models import Q
 from .forms import NewUserForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import views as auth_views
+
 
 
 # Create your views here.
@@ -18,30 +19,59 @@ def home(request):
 def add_cart(request):
     if request.method == 'POST':
         product_id = request.POST.get('AddButton', '')
-        product = Product.objects.get(id=product_id)
+        quantity=request.POST.get('quantity','')
+        
+        prod_with_qu=Product_with_quantity(product_id=product_id,quantity=int(quantity))
         profile = Profile.objects.get(user=request.user)
-        profile.cart.add(product)
-        return redirect('search')
+        if list(profile.cart.filter(product_id=product_id))==[]:
+            prod_with_qu.save()
+            product = Product.objects.get(id=product_id)
+            profile.cart.add(prod_with_qu)
+        else:
+            product= profile.cart.get(product_id=product_id)
+            product.quantity+=int(quantity)
+            product.save()
+
+        q=request.POST.get('q','')
+        url="../../app/searchresults/?q=" + q 
+        return redirect(url)
 
 def remove_cart(request):
     if request.method == 'POST':
         product_id = request.POST.get('RemoveButton', '')
-        product = Product.objects.get(id=product_id)
+        quantity=int(request.POST.get('quantity',''))
         profile = Profile.objects.get(user=request.user)
-        profile.cart.remove(product)
+        product=profile.cart.get(product_id=product_id)
+
+        if product.quantity-quantity<1:
+            profile.cart.remove(product)
+            product.delete()
+        else:
+            product.quantity-=quantity
+            product.save()
         return redirect('cart')
 
 
 def cart(request):
     profile = Profile.objects.get(user=request.user)
-
     cart=profile.cart.all()
-    supermarkets=set([x.supermarket for x in cart ])
-
+    products=[]
+    quantities=[]
+    for prod in cart:
+        products.append([Product.objects.get(id=prod.product_id),prod.quantity])
+        
+    supermarkets=set([x[0].supermarket for x in products ])
+    total = 0
+    for product in products:
+        price = product[0].price
+        price = str(price)
+        price = price.replace(" ", "")
+        total += int(price) * product[1]
 
     context = {
-        'cart': profile.cart.all(),
-        'supermarkets':supermarkets
+        'cart': products,
+        'supermarkets':supermarkets,
+        'sum' : total
     }
     return render(request, 'app/cart.html', context)
 
@@ -76,7 +106,3 @@ def register_request(request):
         form = UserCreationForm()
     return render(request, 'app/register.html', {'form': form})
 
-def login_user(request, template_name='app/login.html', extra_context=None):  
-    response = auth_views.login(request, template_name)  
-    if request.POST.has_key('remember_me'):    
-        request.session.set_expiry(1209600)

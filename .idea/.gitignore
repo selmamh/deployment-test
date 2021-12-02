@@ -3,4 +3,4 @@
 /workspace.xml
 # CodeStream ignored files
 /../../BetterDeal\.idea/codestream.xml
-/../../BetterDeal/db.sqlite3
+#/../../BetterDeal/db.sqlite3

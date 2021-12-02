@@ -1,5 +1,6 @@
 {% extends "app/base.html" %}
 
+
 {% block content %}
 {% load static %}
 
@@ -16,19 +17,25 @@
   </h3>
 
   <div class="container">
-    {% for product  in cart %}
-    {% if product.supermarket == supermarket %}
+    {% for product in cart %}
+    {% if product.0.supermarket == supermarket %}
         <div class="col-md-6">
           <table class="my_table">
             <tr>
-              <td height="100" width="100"><img src="/static/{{ product.supermarket}}-images/{{ product.image_name }}" alt="My image" height="100"/> <br></td>
+              <td height="100" width="100"><img src="/static/{{ product.0.supermarket}}-images/{{ product.0.image_name }}" alt="My image" height="100"/> <br></td>
               <td>
-                <span>{{ product.product_name }}</span><br>
-                <img src="/static/{{ product.supermarket}}-images/{{ product.supermarket}}.png" alt="My image" height="15"/> <br>
-                {{ product.price }} Ft <br>
+                <span>{{ product.0.product_name }}</span><br>
+                <img src="/static/{{ product.0.supermarket}}-images/{{ product.0.supermarket}}.png" alt="My image" height="15"/>
+                {{ product.1 }}
+                 <br>
+                {{ product.0.price }} Ft <br>
                 <form action="{% url 'removecart' %}" method="POST"> 
                   {% csrf_token %}
-                  <button name="RemoveButton" type="sumbit" value={{ product.id }} >Remove from Cart</button>
+                  <button type="sumbit"  >Remove from Cart</button>
+                  <input name="RemoveButton" class="my_green_button" type="hidden" value={{ product.0.id }} >
+                  <input name="quantity" ,type="text", id="{{ product.0.id }}", size=2 value="1">
+                  <button type="button" , onclick="increaseButtonClick( {{ product.0.id }} )" >+</button>
+                  <button type="button" , onclick="decreaseButtonClick( {{ product.0.id }} )" >-</button>
                 </form>
               </td>
             </tr>
@@ -36,8 +43,24 @@
         </div>
     {% endif %}
     {% endfor %}
+    <div class="col-25">
+      <div class="container">
+        <h4>Cart
+          <span class="price" style="color:black">
+            <i class="fa fa-shopping-cart"></i>
+          </span>
+        </h4>
+        {% for product in cart %}
+          {% if product.supermarket == supermarket %}
+            <p><span class="price">{{ product.price }}</span></p>
+            {% endif %}
+        {% endfor %} 
+        <h4>
+          <p><span class="price">{{ sum }}</span></p>
+        </h4> 
+      </div>
+    </div>  
   </div>
-
 </div>
     
 {% endfor %}

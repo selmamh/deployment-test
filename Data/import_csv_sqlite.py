@@ -6,7 +6,7 @@ con = sqlite3.connect("..\db.sqlite3")
 cur = con.cursor()
 
 #cur.execute("DROP TABLE product; ")
-cur.execute("CREATE TABLE product (product_name, price, supermarket, id);") 
+#cur.execute("CREATE TABLE product (product_name, price, supermarket, id);") 
 
 cur.execute("DELETE FROM product;") # resets the table 
 supermarkets= ['aldi','tesco']

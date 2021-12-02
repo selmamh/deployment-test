@@ -1,8 +1,12 @@
+
+
+
 {% extends "app/base.html" %}
 {% block content %}
 {% load static %}
 
-<h2 class="searchresults-title">SearchResults</h2>
+<h2 class="searchresults-title" style="text-align: center">Results</h2>
+<div style="text-align: center"><img src="{% static 'app/undraw_gone_shopping_vwmc.png' %}" height="300" alt="My image" style="text-align: center"></div>
 
 
 
@@ -21,7 +25,12 @@
             {% if request.user.is_authenticated %}
               <form action="{% url 'addcart' %}" method="POST"> 
                 {% csrf_token %}
-                <button name="AddButton" class="my_green_button" type="sumbit" value={{ product.id }} >Add to cart</button>
+                <button class="my_green_button" type="sumbit" >Add to cart</button>
+                <input name="AddButton" class="my_green_button" type="hidden" value={{ product.id }} >
+                <input name="q" class="my_green_button" type="hidden" value={{ request.GET.q }} >
+                <input name="quantity" ,type="text", id="{{ product.id }}", value="1">
+                <button type="button" , onclick="increaseButtonClick( {{ product.id }} )" >+</button>
+                <button type="button" , onclick="decreaseButtonClick( {{ product.id }} )" >-</button>
               </form>
             {% endif %}
           </td>
@@ -44,7 +53,12 @@
             {% if request.user.is_authenticated %}
               <form action="{% url 'addcart' %}" method="POST"> 
                 {% csrf_token %}
-                <button name="AddButton" class="my_green_button" type="sumbit" value={{ product.id }} >Add to cart</button>
+                <button class="my_green_button" type="sumbit" >Add to cart</button>
+                <input name="AddButton" class="my_green_button" type="hidden" value={{ product.id }} >
+                <input name="q" class="my_green_button" type="hidden" value={{ request.GET.q }} >
+                <input name="quantity" ,type="text", id="{{ product.id }}", value="1">
+                <button type="button" , onclick="increaseButtonClick( {{ product.id }} )" >+</button>
+                <button type="button" , onclick="decreaseButtonClick( {{ product.id }} )" >-</button>
               </form>
             {% endif %}
           </td>
@@ -83,3 +97,4 @@
 
 {% endif %}
 {% endblock nav %}
+

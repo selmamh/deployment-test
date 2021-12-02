@@ -29,7 +29,7 @@ class CartModelTests(TestCase):
         user1 = User.objects.create_user('user4', 'user@gmail.com', 'pw', )
         user1.save()
         profile = Profile.objects.get(user_id=user1.id)
-        product1 = profile.cart.create(product_name='tej', price=255, supermarket='aldi', image_name='')
+        product1 = profile.cart.create(product_id=15, quantity=2)
         product1.save()
         self.assertEqual(profile.cart.all()[0], product1)
 
@@ -61,15 +61,12 @@ class PageTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.redirect_chain[-1][0], '/app/search/')
 
-        # Login page doesn't redirect with wrong login , and shows the incorrect login message
+        # Login page doesn't redirect with wrong login 
 
         response = self.c.post('/app/login/', {'username': 'wronguser', 'password': 'test1234'}, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.redirect_chain, [])
-        content = response.content.decode("utf-8")
-        self.assertEqual(
-            'Please enter a correct username and password. Note that both fields may be case-sensitive' in content,
-            True)
+        
 
     def test__search__(self):
         # Search Page avaiable
@@ -115,14 +112,14 @@ class PageTests(TestCase):
 
         # Adding to cart
 
-        response = self.c.post('/app/addcart/', {"AddButton": 1}, follow=True)
+        response = self.c.post('/app/addcart/', {"AddButton": 1, "quantity":4}, follow=True)
         response = self.c.get('/app/cart/')
         content = response.content.decode("utf-8")
         self.assertEqual('Remove from Cart' in content, True)
 
         # Removing From Cart
 
-        response = self.c.post('/app/removecart/', {'RemoveButton': 1}, follow=True)
+        response = self.c.post('/app/removecart/', {'RemoveButton': 1, "quantity":4}, follow=True)
         content = response.content.decode("utf-8")
         self.assertEqual('Remove from Cart' in content, False)
 
